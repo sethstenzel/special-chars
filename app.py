@@ -8,16 +8,30 @@ from controller import controller as controller
 
 def main(model, view, controller):
     threads = []
-    msg_queue = Queue(1)
+    model_msg_queue = Queue(1)
+    view_msg_queue = Queue(1)
+    controller_msg_queue = Queue(1)
     termination_flag = Queue(1)
 
-    m = Thread(name = "model", target = model, args =(msg_queue, termination_flag, ))
+    m = Thread(name = "model", target = model, args =(
+        model_msg_queue,
+        controller_msg_queue,
+        termination_flag, 
+        ))
     threads.append(m)
 
-    v = Thread(name = "view", target = view, args =(msg_queue, termination_flag, ))
+    v = Thread(name = "view", target = view, args =(
+        view_msg_queue,
+        termination_flag, 
+        ))
     threads.append(v)
 
-    c = Thread(name = "controller", target = controller, args =(msg_queue, termination_flag, ))
+    c = Thread(name = "controller", target = controller, args =(
+        model_msg_queue,
+        view_msg_queue,
+        controller_msg_queue,
+        termination_flag, 
+        ))
     threads.append(c)
 
     # Start all threads

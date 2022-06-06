@@ -1,12 +1,13 @@
+import queue
 import wx
 import sys
 
-class CustomShapedFrame(wx.Frame):
+class BorderlessUI(wx.Frame):
     
-    def __init__(self, msg_queue, termination_flag):
+    def __init__(self, view_msg_queue, termination_flag):
         wx.Frame.__init__(self, None, -1, "SpecialChars", style = wx.FRAME_SHAPED | wx.SIMPLE_BORDER)
 
-        self.msg_queue = msg_queue
+        self.view_msg_queue = view_msg_queue
         self.termination_flag = termination_flag
 
         self.window_width = 520
@@ -43,8 +44,8 @@ class CustomShapedFrame(wx.Frame):
             if not self.termination_flag.empty():
                 self.exit_view()
             msg = ""
-            if not self.msg_queue.empty():
-                msg = self.msg_queue.get()
+            if not self.view_msg_queue.empty():
+                msg = self.view_msg_queue.get()
             if msg == "show":
                 self.Show()
             elif msg == "hide":
@@ -81,10 +82,10 @@ class CustomShapedFrame(wx.Frame):
         image = image.Scale(width, height, wx.IMAGE_QUALITY_HIGH)
         return wx.Bitmap(image)
 
-def view(msg_queue, termination_flag):
+def view(view_msg_queue, termination_flag):
     try:
         app_view = wx.App()
-        view_window = CustomShapedFrame(msg_queue, termination_flag)
+        view_window = BorderlessUI(view_msg_queue, termination_flag)
         view_window.Show()
         app_view.MainLoop()
     except:
