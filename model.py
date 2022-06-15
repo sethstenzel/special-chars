@@ -79,17 +79,20 @@ def model(model_msg_queue, controller_msg_queue, termination_flag, has_focus):
                     current_level = get_level(levels, level_id = pattern["action_data"])
                     controller_msg_queue.put((app_visible, current_level))
                 
-                elif pattern["action"] == "hide" and app_visible == True:
+                elif pattern["action"] == "hide" and app_visible == True and not has_focus.empty():
                     app_visible = False
-                    controller_msg_queue.put((app_visible, get_level(levels, level_name="initial")))
+                    current_level = get_level(levels, level_name="initial")
+                    controller_msg_queue.put((app_visible, current_level))
 
                 elif pattern["action"] == "show":
                     app_visible = True
-                    controller_msg_queue.put((app_visible, get_level(levels, level_name="initial")))
+                    current_level = get_level(levels, level_name="initial")
+                    controller_msg_queue.put((app_visible, current_level))
 
                 elif pattern["action"] == "exit" and app_visible == True and not has_focus.empty():
                     termination_flag.put(True)
-                    controller_msg_queue.put((app_visible, get_level(levels, level_name="initial")))
+                    current_level = get_level(levels, level_name="initial")
+                    controller_msg_queue.put((app_visible, current_level))
 
                 elif (
                     pattern["action"] == "get_character" and 
@@ -100,7 +103,7 @@ def model(model_msg_queue, controller_msg_queue, termination_flag, has_focus):
                     controller_msg_queue.put((app_visible, get_level(levels, level_name="initial")))
                     paste()
                 else:
-                    controller_msg_queue.put((app_visible, get_level(levels, level_name="initial")))
+                    controller_msg_queue.put((app_visible, current_level))
     except Exception:
             traceback.print_exc()
             termination_flag.put(True)

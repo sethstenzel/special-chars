@@ -70,11 +70,7 @@ class BorderlessUI(wx.Frame):
             if msg == "show":
                 self.Show()
                 self.SetFocus()
-                self.SetTransparent(255)
             elif msg == "hide":
-                for n in range(1, 11):
-                    self.SetTransparent(255-int(n*25.5))
-                    time.sleep(0.005)
                 self.Hide()
             elif ".bmp" in msg:
                 self.update_bg(msg)
