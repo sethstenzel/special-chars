@@ -1,6 +1,8 @@
-import queue
 import wx
 import sys
+import time
+import sys
+import traceback
 
 class BorderlessUI(wx.Frame):
     
@@ -38,6 +40,7 @@ class BorderlessUI(wx.Frame):
         self.update_timer = wx.Timer(self)
         self.update_timer.Start(milliseconds=int(25))
         self.Bind(wx.EVT_TIMER, self.check_queues)
+        
 
     def check_queues(self, *args):
         try:
@@ -56,7 +59,6 @@ class BorderlessUI(wx.Frame):
             self.termination_flag.put(True)
             self.exit_view()
             
-
     def update_bg(self, bg):
         bg = f"{self.images_directory}{bg}"
         new_bmp = wx.Image(bg, wx.BITMAP_TYPE_ANY).ConvertToBitmap()
@@ -88,6 +90,8 @@ def view(view_msg_queue, termination_flag):
         view_window = BorderlessUI(view_msg_queue, termination_flag)
         view_window.Show()
         app_view.MainLoop()
-    except:
+    except Exception:
+        traceback.print_exc()
         termination_flag.put(True)
+        time.sleep(1)
         sys.exit()
