@@ -108,6 +108,48 @@ level_data = [
                     "action_data":"a",
                     "when_visible":True,
                 },
+                                {
+                    # s key
+                    "key_pattern":[KeyCode(char="s")], 
+                    "action":"get_character",
+                    "action_data":"s",
+                    "when_visible":True,
+                },
+                                {
+                    # d key
+                    "key_pattern":[KeyCode(char="d")], 
+                    "action":"get_character",
+                    "action_data":"d",
+                    "when_visible":True,
+                },
+                                {
+                    # f key
+                    "key_pattern":[KeyCode(char="f")], 
+                    "action":"get_character",
+                    "action_data":"f",
+                    "when_visible":True,
+                },
+                                {
+                    # q key
+                    "key_pattern":[KeyCode(char="q")], 
+                    "action":"get_character",
+                    "action_data":"q",
+                    "when_visible":True,
+                },
+                                {
+                    # w key
+                    "key_pattern":[KeyCode(char="w")], 
+                    "action":"get_character",
+                    "action_data":"w",
+                    "when_visible":True,
+                },
+                                {
+                    # e key
+                    "key_pattern":[KeyCode(char="e")], 
+                    "action":"get_character",
+                    "action_data":"e",
+                    "when_visible":True,
+                },
                 # endregion (lower_a)
             ]
         },

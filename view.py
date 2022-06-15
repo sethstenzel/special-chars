@@ -6,11 +6,12 @@ import traceback
 
 class BorderlessUI(wx.Frame):
     
-    def __init__(self, view_msg_queue, termination_flag):
+    def __init__(self, view_msg_queue, termination_flag, has_focus):
         wx.Frame.__init__(self, None, -1, "SpecialChars", style = wx.FRAME_SHAPED | wx.SIMPLE_BORDER)
 
         self.view_msg_queue = view_msg_queue
         self.termination_flag = termination_flag
+        self.has_focus = has_focus
 
         self.window_width = 520
         self.window_height = 167
@@ -40,7 +41,24 @@ class BorderlessUI(wx.Frame):
         self.update_timer = wx.Timer(self)
         self.update_timer.Start(milliseconds=int(25))
         self.Bind(wx.EVT_TIMER, self.check_queues)
+        self.Bind(wx.EVT_SET_FOCUS, self.gained_focus)
+        self.Bind(wx.EVT_KILL_FOCUS, self.lost_focus)
         
+        self.Bind(wx.EVT_LEFT_DOWN, self.on_mouse_down)
+        self.Bind(wx.EVT_LEFT_UP, self.on_mouse_up)
+        self.Bind(wx.EVT_RIGHT_DOWN, self.on_mouse_down)
+        self.Bind(wx.EVT_RIGHT_UP, self.on_mouse_up)
+        self.Bind(wx.EVT_MOTION, self.on_mouse_dragging)
+        self.SetFocus()
+
+    
+    def gained_focus(self, *args):
+        if self.has_focus.empty():
+            self.has_focus.put(True)
+
+    def lost_focus(self, *args):
+        if not self.has_focus.empty():
+            self.has_focus.get()
 
     def check_queues(self, *args):
         try:
@@ -51,7 +69,12 @@ class BorderlessUI(wx.Frame):
                 msg = self.view_msg_queue.get()
             if msg == "show":
                 self.Show()
+                self.SetFocus()
+                self.SetTransparent(255)
             elif msg == "hide":
+                for n in range(1, 11):
+                    self.SetTransparent(255-int(n*25.5))
+                    time.sleep(0.005)
                 self.Hide()
             elif ".bmp" in msg:
                 self.update_bg(msg)
@@ -84,10 +107,29 @@ class BorderlessUI(wx.Frame):
         image = image.Scale(width, height, wx.IMAGE_QUALITY_HIGH)
         return wx.Bitmap(image)
 
-def view(view_msg_queue, termination_flag):
+
+    def on_mouse_down(self, event):
+        self.CaptureMouse()
+        pos = self.ClientToScreen(event.GetPosition())
+        origin = self.GetPosition()
+        self.delta = wx.Point(pos.x - origin.x, pos.y - origin.y)
+
+    def on_mouse_dragging(self, event):
+        if  event.Dragging() and (event.RightIsDown() or event.LeftIsDown()):
+            pos = self.ClientToScreen(event.GetPosition())
+            newPos = (pos.x - self.delta.x, pos.y - self.delta.y)
+            self.Move(newPos)
+
+    def on_mouse_up(self, event):
+        if self.HasCapture():
+            self.ReleaseMouse()
+
+
+
+def view(view_msg_queue, termination_flag, has_focus):
     try:
         app_view = wx.App()
-        view_window = BorderlessUI(view_msg_queue, termination_flag)
+        view_window = BorderlessUI(view_msg_queue, termination_flag, has_focus)
         view_window.Show()
         app_view.MainLoop()
     except Exception:

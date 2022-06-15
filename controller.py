@@ -3,7 +3,12 @@ import traceback
 import sys
 import time
 
-def controller(model_msg_queue, view_msg_queue, controller_msg_queue, termination_flag):
+def controller(
+    model_msg_queue,
+    view_msg_queue,
+    controller_msg_queue,
+    termination_flag,
+    ):
     app_visibile = True
     current_level = None
     try:
@@ -44,14 +49,18 @@ def controller(model_msg_queue, view_msg_queue, controller_msg_queue, terminatio
                 ):
                     key_log = []
                     model_msg_queue.put(pattern)
-                    app_visibile, current_level = controller_msg_queue.get()
-                    view_msg_queue.put(current_level.bg)
+                    new_app_visibile, new_current_level = controller_msg_queue.get()
+                    if current_level.name != new_current_level.name:
+                        view_msg_queue.put(new_current_level.bg)
                     while not view_msg_queue.empty():
                         time.sleep(0.01)
-                    if app_visibile:
-                        view_msg_queue.put("show")
-                    else:
-                        view_msg_queue.put("hide")
+                    if new_app_visibile != app_visibile:
+                        if new_app_visibile:
+                            view_msg_queue.put("show")
+                        else:
+                            view_msg_queue.put("hide")
+                    current_level = new_current_level
+                    app_visibile = new_app_visibile
 
 
         except Exception:

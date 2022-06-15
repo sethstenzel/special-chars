@@ -3,6 +3,7 @@ import time
 import sys
 import traceback
 import pyperclip
+from pynput.keyboard import Key, Controller
 from special_chars import special_character_mappings
 from level_data import level_data
 
@@ -39,7 +40,16 @@ def get_character(current_level, pattern):
     special_character = special_character_mappings[current_level.name][pattern["action_data"]]
     pyperclip.copy(special_character)
 
-def model(model_msg_queue, controller_msg_queue, termination_flag):
+
+def paste():
+    time.sleep(0.1)
+    keyboard = Controller()
+    keyboard.press(Key.ctrl.value)
+    keyboard.press('v')
+    keyboard.release('v')
+    keyboard.release(Key.ctrl.value)
+
+def model(model_msg_queue, controller_msg_queue, termination_flag, has_focus):
     try:
         app_visible = True
         levels = get_levels()
@@ -61,7 +71,11 @@ def model(model_msg_queue, controller_msg_queue, termination_flag):
                     controller_msg_queue.put((app_visible, current_level))
                     time.sleep(0.025)
 
-                if pattern["action"] == "change_level" and app_visible == True:            
+                if (
+                    pattern["action"] == "change_level" and
+                    app_visible == True and
+                    not has_focus.empty()
+                ):            
                     current_level = get_level(levels, level_id = pattern["action_data"])
                     controller_msg_queue.put((app_visible, current_level))
                 
@@ -73,15 +87,18 @@ def model(model_msg_queue, controller_msg_queue, termination_flag):
                     app_visible = True
                     controller_msg_queue.put((app_visible, get_level(levels, level_name="initial")))
 
-                elif pattern["action"] == "exit" and app_visible == True:
+                elif pattern["action"] == "exit" and app_visible == True and not has_focus.empty():
                     termination_flag.put(True)
                     controller_msg_queue.put((app_visible, get_level(levels, level_name="initial")))
 
-                elif pattern["action"] == "get_character":
+                elif (
+                    pattern["action"] == "get_character" and 
+                    not has_focus.empty()
+                ):
                     get_character(current_level, pattern)
                     app_visible = False
                     controller_msg_queue.put((app_visible, get_level(levels, level_name="initial")))
-
+                    paste()
                 else:
                     controller_msg_queue.put((app_visible, get_level(levels, level_name="initial")))
     except Exception:
