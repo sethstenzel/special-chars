@@ -130,3 +130,7 @@ dmypy.json
 
 # vscode
 .vscode
+
+# Auto-py-to-exe files / folders
+build2exe.json
+

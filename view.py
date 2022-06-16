@@ -1,6 +1,6 @@
 import wx
 import sys
-import time
+import os
 import sys
 import traceback
 
@@ -20,9 +20,13 @@ class BorderlessUI(wx.Frame):
         _, client_res_height = wx.DisplaySize()
         self.x_position = 75
         self.y_position = client_res_height - self.window_height - 100     
-        self.SetPosition(wx.Point((self.x_position, self.y_position)))
-
-        self.images_directory = ".\\graphics\\"
+        self.SetPosition(wx.Point((self.x_position, self.y_position)))     
+        # Code for pathing when compling with pyinstaller single exe mode.
+        if hasattr( sys, "_MEIPASS"):
+            self.images_directory = sys._MEIPASS + "\\graphics\\"
+        else:
+            self.images_directory = ".\\graphics\\"
+        
         self.initial_bg_image = f"{self.images_directory}initial.bmp"
 
         self.bmp = wx.Image(self.initial_bg_image, wx.BITMAP_TYPE_ANY).ConvertToBitmap()
@@ -120,8 +124,6 @@ class BorderlessUI(wx.Frame):
     def on_mouse_up(self, event):
         if self.HasCapture():
             self.ReleaseMouse()
-
-
 
 def view(view_msg_queue, termination_flag, has_focus):
     try:
