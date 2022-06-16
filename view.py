@@ -76,6 +76,7 @@ class BorderlessUI(wx.Frame):
                 self.update_bg(msg)
         except Exception as e:
             self.termination_flag.put(True)
+            traceback.print_exc()
             self.exit_view()
             
     def update_bg(self, bg):
@@ -131,5 +132,4 @@ def view(view_msg_queue, termination_flag, has_focus):
     except Exception:
         traceback.print_exc()
         termination_flag.put(True)
-        time.sleep(1)
         sys.exit()

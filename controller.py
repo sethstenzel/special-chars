@@ -25,7 +25,6 @@ def controller(
     except Exception:
         traceback.print_exc()
         termination_flag.put(True)
-        time.sleep(0.5)
         sys.exit()
 
     key_log = []
@@ -66,9 +65,13 @@ def controller(
         except Exception:
             traceback.print_exc()
             termination_flag.put(True)
-            time.sleep(0.5)
             sys.exit()
 
 
-    with keyboard.Listener(on_press=on_press) as listener:
-        listener.join()
+    try:
+        with keyboard.Listener(on_press=on_press) as listener:
+            listener.join()
+    except Exception:
+        traceback.print_exc()
+        termination_flag.put(True)
+        sys.exit()

@@ -107,5 +107,4 @@ def model(model_msg_queue, controller_msg_queue, termination_flag, has_focus):
     except Exception:
             traceback.print_exc()
             termination_flag.put(True)
-            time.sleep(1)
             sys.exit()

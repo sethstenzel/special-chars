@@ -17,7 +17,7 @@ level_data = [
                 },
                 {
                     # show gui
-                    "key_pattern":[Key.ctrl_l, Key.shift, Key.alt_l], 
+                    "key_pattern":[Key.alt_l, Key.alt_l, Key.alt_l], 
                     "action":"show",
                     "action_data":"",
                     "when_visible":False,
@@ -25,7 +25,7 @@ level_data = [
                 {
                     # exit app / shift key
                     "key_pattern":[Key.shift], 
-                    "action":"exit",
+                    "action":"hide",
                     "action_data":"",
                     "when_visible":True,
                 },
