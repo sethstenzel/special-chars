@@ -849,6 +849,13 @@ level_data = [
                     "when_visible":True,
                 },
                 {
+                    # exit app
+                    "key_pattern":[Key.shift], 
+                    "action":"exit",
+                    "action_data":"",
+                    "when_visible":True,
+                },
+                {
                     # a key
                     "key_pattern":[KeyCode(char="a")], 
                     "action":"get_character",
