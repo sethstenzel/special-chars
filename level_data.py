@@ -88,10 +88,10 @@ level_data = [
             "patterns":[
                 # region (lower_a)
                 {
-                    # hide gui
+                    # back to initial
                     "key_pattern":[Key.esc], 
-                    "action":"hide",
-                    "action_data":"",
+                    "action":"change_level",
+                    "action_data":1,
                     "when_visible":True,
                 },
                 {
@@ -160,10 +160,10 @@ level_data = [
             "patterns":[
                 # region (upper_a)
                 {
-                    # hide gui
+                    # back to initial
                     "key_pattern":[Key.esc], 
-                    "action":"hide",
-                    "action_data":"",
+                    "action":"change_level",
+                    "action_data":1,
                     "when_visible":True,
                 },
                 {
@@ -232,10 +232,10 @@ level_data = [
             "patterns":[
                 # region (lower_e)
                 {
-                    # hide gui
+                    # back to initial
                     "key_pattern":[Key.esc], 
-                    "action":"hide",
-                    "action_data":"",
+                    "action":"change_level",
+                    "action_data":1,
                     "when_visible":True,
                 },
                 {
@@ -283,10 +283,10 @@ level_data = [
             "patterns":[
                 # region (upper_e)
                 {
-                    # hide gui
+                    # back to initial
                     "key_pattern":[Key.esc], 
-                    "action":"hide",
-                    "action_data":"",
+                    "action":"change_level",
+                    "action_data":1,
                     "when_visible":True,
                 },
                 {
@@ -335,10 +335,10 @@ level_data = [
             "patterns":[
                 # region (lower_i)
                 {
-                    # hide gui
+                    # back to initial
                     "key_pattern":[Key.esc], 
-                    "action":"hide",
-                    "action_data":"",
+                    "action":"change_level",
+                    "action_data":1,
                     "when_visible":True,
                 },
                 {
@@ -386,10 +386,10 @@ level_data = [
             "patterns":[
                 # region (lower_i)
                 {
-                    # hide gui
+                    # back to initial
                     "key_pattern":[Key.esc], 
-                    "action":"hide",
-                    "action_data":"",
+                    "action":"change_level",
+                    "action_data":1,
                     "when_visible":True,
                 },
                 {
@@ -437,10 +437,10 @@ level_data = [
             "patterns":[
                 # region (lower_o)
                 {
-                    # hide gui  
+                    # back to initial
                     "key_pattern":[Key.esc], 
-                    "action":"hide",
-                    "action_data":"",
+                    "action":"change_level",
+                    "action_data":1,
                     "when_visible":True,
                 },
                 {
@@ -509,10 +509,10 @@ level_data = [
             "patterns":[
                 # region (upper_o)
                 {
-                    # hide gui
+                    # back to initial
                     "key_pattern":[Key.esc], 
-                    "action":"hide",
-                    "action_data":"",
+                    "action":"change_level",
+                    "action_data":1,
                     "when_visible":True,
                 },
                 {
@@ -581,10 +581,10 @@ level_data = [
             "patterns":[
                 # region (lower_u)
                 {
-                    # hide gui
+                    # back to initial
                     "key_pattern":[Key.esc], 
-                    "action":"hide",
-                    "action_data":"",
+                    "action":"change_level",
+                    "action_data":1,
                     "when_visible":True,
                 },
                 {
@@ -632,10 +632,10 @@ level_data = [
             "patterns":[
                 # region (upper_u)
                 {
-                    # hide gui
+                    # back to initial
                     "key_pattern":[Key.esc], 
-                    "action":"hide",
-                    "action_data":"",
+                    "action":"change_level",
+                    "action_data":1,
                     "when_visible":True,
                 },
                 {
@@ -681,13 +681,13 @@ level_data = [
             "level_id":12,
             "name":"lower_misc",
             "bg":"lower_misc.bmp",
-"patterns":[
+            "patterns":[
                 # region (lower_misc)
                 {
-                    # hide gui
+                    # back to initial
                     "key_pattern":[Key.esc], 
-                    "action":"hide",
-                    "action_data":"",
+                    "action":"change_level",
+                    "action_data":1,
                     "when_visible":True,
                 },
                 {
@@ -763,10 +763,10 @@ level_data = [
             "patterns":[
                 # region (upper_misc)
                 {
-                    # hide gui
+                    # back to initial
                     "key_pattern":[Key.esc], 
-                    "action":"hide",
-                    "action_data":"",
+                    "action":"change_level",
+                    "action_data":1,
                     "when_visible":True,
                 },
                 {
@@ -842,10 +842,10 @@ level_data = [
             "patterns":[
                 # region (upper_e)
                 {
-                    # hide gui
+                    # back to initial
                     "key_pattern":[Key.esc], 
-                    "action":"hide",
-                    "action_data":"",
+                    "action":"change_level",
+                    "action_data":1,
                     "when_visible":True,
                 },
                 {
