@@ -3,7 +3,7 @@ An application to make selecting special characters on a US keyboard easier.
 
 
 
-![alt text](graphics/initial.bmp?raw=true)
+![alt text](graphics/screenshot-sc.png)
 
 ## Usage:
 Once the app has started, hide it with `<esc>`Cancel changes
