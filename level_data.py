@@ -17,7 +17,7 @@ level_data = [
                 },
                 {
                     # show gui
-                    "key_pattern":[Key.alt_l, Key.alt_l, Key.alt_l], 
+                    "key_pattern":[Key.alt_l, Key.alt_l], # HOTKEY TO DISPLAY
                     "action":"show",
                     "action_data":"",
                     "when_visible":False,
