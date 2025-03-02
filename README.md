@@ -1,5 +1,7 @@
 # SpecialChars
 An application to make selecting special characters on a US keyboard easier.
+When the application is running, pressing a hotkey combination will trigger its display.
+Then using intuative selection, one can select the special character they need and it will be inserted into thier application.
 
 
 
